@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>VGA Character Editor</title>
+    <style>
+
+    * {
+        font-family: inherit;
+        font-size: inherit;
+        margin: 0px;
+    }
+
+    body {
+        font-family: sans-serif;
+    }
+
+    #container {
+        display: flex;
+        justify-content: center;
+    }
+
+    #preview {
+        background-color: rgb(40,40,40);
+        display: block;
+        width: 265px;
+        height: 529px;
+        display: block;
+        justify-content: center;
+        border-bottom-left-radius: 5px;
+    }
+
+    #binary {
+        background-color: rgb(220,220,220);
+        border-top-right-radius: 4% / 2%;
+        border-top-left-radius: 4% / 2%;
+        display: block;
+        width: 265px;
+        height: 529px;
+        font-family: monospace;
+        font-size: 14px;
+        box-sizing: border-box;
+        padding: 16px;
+        border-bottom-right-radius: 5px;
+    }
+
+    #control {
+        background-color: rgb(100,100,100);
+        color: rgb(255,255,255);
+        padding-bottom: 16px;
+        padding-top: 16px;
+        border-bottom-right-radius: 20px;
+        border-bottom-left-radius: 20px;
+    }
+
+    #footer {
+        padding: 32px;
+        color: rgb(170,170,170);
+    }
+
+    </style>
+</head>
+<body>
+    <center>
+    <div id="control">
+        <h1>VGA Character Editor</h1>
+        <select autocomplete="off" onchange="changeMode()" name="Type" id = "typeSel">
+            <option value="0" selected>VGA (8x16)</option>
+            <option value="1">PETSCII (8x8)</option>
+        </select>
+        <button onclick="clearMap()">Clear</button>
+        <button onclick="invertMap()">Invert</button>
+        <button onclick="copyChar()">Copy</button>
+    </div>
+    </center>
+    <div id="container">
+        <center>
+        <div id="preview">
+            <canvas id="previewCanvas32" width="32" height="64"></canvas>
+            <canvas id="previewCanvas64" width="64" height="128"></canvas>
+            <br></br>
+            <canvas id="previewCanvas128" width="128" height="256"></canvas>
+        </div>
+        </center>
+        <canvas id="map" width="265" height="529"></canvas>
+        <code id="binary">
+            <span>static uint8_t _out[</span><span id="arraySize">16</span>] = </span> <br>
+            <span>{</span><br>
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;0b</span><span id="byte0">00000000</span><br>
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;0b</span><span id="byte1">00000000</span><br>
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;0b</span><span id="byte2">00000000</span><br>
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;0b</span><span id="byte3">00000000</span><br>
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;0b</span><span id="byte4">00000000</span><br>
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;0b</span><span id="byte5">00000000</span><br>
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;0b</span><span id="byte6">00000000</span><br>
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;0b</span><span id="byte7">00000000</span><br>
+            <div id="vgaBytes">
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;0b</span><span id="byte8">00000000</span><br>
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;0b</span><span id="byte9">00000000</span><br>
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;0b</span><span id="byte10">00000000</span><br>
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;0b</span><span id="byte11">00000000</span><br>
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;0b</span><span id="byte12">00000000</span><br>
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;0b</span><span id="byte13">00000000</span><br>
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;0b</span><span id="byte14">00000000</span><br>
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;0b</span><span id="byte15">00000000</span><br>
+            </div>
+            <span>};</span>
+        </code>
+    </div>
+
+    <center>
+    <div id="footer">
+        <p>Exported code is formatted for C and C++</p>
+    </div>
+    </center>
+
+    <script src="script.js"></script>
+</body>
+</html>
